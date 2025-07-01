@@ -1,0 +1,8 @@
+# Redirections pour Netlify et autres
+/*    /index.html   200
+
+# Redirections spécifiques pour compatibilité
+/acheter/*  /index.html  200
+/dashboard/*  /index.html  200
+/login  /index.html  200
+/admin/*  /index.html  200
