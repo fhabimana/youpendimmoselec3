@@ -26,10 +26,23 @@ const AdminLogin = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Logique de connexion administrateur
-    console.log("Connexion administrateur:", formData);
-    // Redirection vers l'espace admin après connexion réussie
-    navigate("/admin");
+
+    // Credentials administrateur autorisés
+    const ADMIN_EMAIL = "admin@youpendimmosect.com";
+    const ADMIN_PASSWORD = "000000";
+
+    // Vérification des credentials
+    if (
+      formData.email === ADMIN_EMAIL &&
+      formData.password === ADMIN_PASSWORD
+    ) {
+      console.log("Connexion administrateur réussie:", formData);
+      // Redirection vers l'espace admin après connexion réussie
+      navigate("/admin");
+    } else {
+      alert("Email ou mot de passe incorrect. Accès refusé.");
+      console.log("Tentative de connexion échouée:", formData);
+    }
   };
 
   return (
@@ -78,7 +91,7 @@ const AdminLogin = () => {
                     <Input
                       id="email"
                       type="email"
-                      placeholder="admin@youpendimmoselect.com"
+                      placeholder="admin@youpendimmosect.com"
                       className="pl-10 border-gray-200 focus:border-brand-green"
                       value={formData.email}
                       onChange={(e) =>
