@@ -29,12 +29,12 @@ const AdminLogin = () => {
 
     // Credentials administrateur autorisés
     const ADMIN_EMAIL = "admin@youpendimmosect.com";
-    const ADMIN_PASSWORD = "000000";
+    const ADMIN_PASSWORDS = ["000000", "admin"];
 
     // Vérification des credentials
     if (
       formData.email === ADMIN_EMAIL &&
-      formData.password === ADMIN_PASSWORD
+      ADMIN_PASSWORDS.includes(formData.password)
     ) {
       console.log("Connexion administrateur réussie:", formData);
       // Redirection vers l'espace admin après connexion réussie

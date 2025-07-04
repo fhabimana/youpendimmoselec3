@@ -7,6 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AuthProvider from "@/components/AuthProvider";
 import Index from "./pages/Index";
 import Buy from "./pages/Buy";
+import Louer from "./pages/Louer";
+import Location from "./pages/Location";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import OwnerRegister from "./pages/OwnerRegister";
@@ -27,6 +29,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/acheter" element={<Buy />} />
+            <Route path="/louer" element={<Louer />} />
+            <Route path="/location" element={<Location />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/owner-register" element={<OwnerRegister />} />
