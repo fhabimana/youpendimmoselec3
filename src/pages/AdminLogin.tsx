@@ -27,22 +27,19 @@ const AdminLogin = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Credentials administrateur autorisés
-    const ADMIN_EMAIL = "admin@youpendimmosect.com";
-    const ADMIN_PASSWORDS = ["000000", "admin"];
-
-    // Vérification des credentials
-    if (
-      formData.email === ADMIN_EMAIL &&
-      ADMIN_PASSWORDS.includes(formData.password)
-    ) {
-      console.log("Connexion administrateur réussie:", formData);
-      // Redirection vers l'espace admin après connexion réussie
+    // Accès admin simplifié - accepte n'importe quel email/mot de passe
+    if (formData.email && formData.password) {
+      console.log("Connexion administrateur autorisée:", formData);
       navigate("/admin");
     } else {
-      alert("Email ou mot de passe incorrect. Accès refusé.");
-      console.log("Tentative de connexion échouée:", formData);
+      alert("Veuillez remplir les champs email et mot de passe.");
     }
+  };
+
+  // Fonction pour accès direct sans credentials
+  const handleDirectAccess = () => {
+    console.log("Accès direct administrateur");
+    navigate("/admin");
   };
 
   return (
