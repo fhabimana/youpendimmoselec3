@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 
 interface PropertyGalleryProps {
-  property: {
+  property?: {
     id: string;
     title: string;
     price: string;
@@ -43,15 +43,32 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
 
+  // Valeurs par défaut si property n'est pas fourni
+  const defaultProperty = {
+    id: "1",
+    title: "Propriété à découvrir",
+    price: "$150,000",
+    location: "Kinshasa, RDC",
+    bedrooms: 2,
+    bathrooms: 1,
+    area: "85m²",
+    parking: 1,
+    images: ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400"],
+    description: "Belle propriété à découvrir",
+    features: ["Climatisé", "Parking", "Sécurité"],
+  };
+
+  const propertyData = property || defaultProperty;
+
   const nextImage = () => {
     setCurrentImageIndex((prev) =>
-      prev === property.images.length - 1 ? 0 : prev + 1,
+      prev === propertyData.images.length - 1 ? 0 : prev + 1,
     );
   };
 
   const prevImage = () => {
     setCurrentImageIndex((prev) =>
-      prev === 0 ? property.images.length - 1 : prev - 1,
+      prev === 0 ? propertyData.images.length - 1 : prev - 1,
     );
   };
 
@@ -61,13 +78,13 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
         {/* Image principale */}
         <div className="relative h-64 overflow-hidden rounded-t-lg">
           <img
-            src={property.images[currentImageIndex]}
-            alt={property.title}
+            src={propertyData.images[currentImageIndex]}
+            alt={propertyData.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
 
           {/* Navigation des images */}
-          {property.images.length > 1 && (
+          {propertyData.images.length > 1 && (
             <>
               <Button
                 variant="ghost"
