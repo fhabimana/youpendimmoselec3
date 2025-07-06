@@ -406,6 +406,35 @@ const Dashboard = () => {
               <CalendarSchedule />
             </TabsContent>
 
+            {/* PDF Tab */}
+            <TabsContent value="pdf" className="space-y-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Rapports Financiers PDF</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <PDFGenerator
+                      reportType="financial"
+                      title="Rapport Financier Propriétaire"
+                    />
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Rapports Propriétés PDF</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <PDFGenerator
+                      reportType="property"
+                      title="Rapport Gestion Propriétés"
+                    />
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+
             {/* Notifications Tab */}
             <TabsContent value="notifications">
               <NotificationCenter />
