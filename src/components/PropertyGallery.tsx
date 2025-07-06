@@ -2,7 +2,13 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import PropertyLocationModal from "./PropertyLocationModal";
 import {
   Heart,
@@ -221,9 +227,11 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle>{propertyData.title}</DialogTitle>
+                </DialogHeader>
                 <div className="space-y-6">
                   <div>
-                    <h2 className="text-2xl font-bold">{propertyData.title}</h2>
                     <p className="text-gray-600 flex items-center gap-1">
                       <MapPin className="w-4 h-4" />
                       {propertyData.location}
