@@ -15,6 +15,7 @@ import OwnerRegister from "./pages/OwnerRegister";
 import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
 import AdminRegister from "./pages/AdminRegister";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +38,7 @@ const App = () => (
             <Route path="/admin" element={<Admin />} />
             <Route path="/admin-login" element={<AdminLogin />} />
             <Route path="/admin-register" element={<AdminRegister />} />
+            <Route path="/about" element={<About />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
