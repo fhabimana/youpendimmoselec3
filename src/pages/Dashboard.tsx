@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import PDFGenerator from "@/components/PDFGenerator";
 import ContractManagement from "@/components/dashboard/ContractManagement";
 import PaymentTracking from "@/components/dashboard/PaymentTracking";
 import MaintenanceRequests from "@/components/dashboard/MaintenanceRequests";
