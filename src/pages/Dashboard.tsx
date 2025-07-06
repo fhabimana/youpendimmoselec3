@@ -9,6 +9,8 @@ import FinancialReports from "@/components/dashboard/FinancialReports";
 import CalendarSchedule from "@/components/dashboard/CalendarSchedule";
 import NotificationCenter from "@/components/dashboard/NotificationCenter";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
