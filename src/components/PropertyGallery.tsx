@@ -262,15 +262,15 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
             </Dialog>
 
             {/* Bouton de géolocalisation */}
-            {property.latitude && property.longitude && (
+            {propertyData.latitude && propertyData.longitude && (
               <PropertyLocationModal
                 property={{
-                  id: property.id,
-                  title: property.title,
-                  location: property.location,
-                  latitude: property.latitude,
-                  longitude: property.longitude,
-                  price: property.price,
+                  id: propertyData.id,
+                  title: propertyData.title,
+                  location: propertyData.location,
+                  latitude: propertyData.latitude,
+                  longitude: propertyData.longitude,
+                  price: propertyData.price,
                 }}
               >
                 <Button variant="outline" className="flex-1">
@@ -280,7 +280,7 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
               </PropertyLocationModal>
             )}
 
-            {property.virtualTour && (
+            {propertyData.virtualTour && (
               <Button className="bg-brand-blue hover:bg-brand-blue/90">
                 <Video className="w-4 h-4 mr-2" />
                 Visite 360°
