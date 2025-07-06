@@ -108,7 +108,7 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
           {/* Badges */}
           <div className="absolute top-3 left-3 flex gap-2">
             <Badge className="bg-brand-green text-white">À vendre</Badge>
-            {property.virtualTour && (
+            {propertyData.virtualTour && (
               <Badge variant="secondary" className="bg-blue-500 text-white">
                 <Video className="w-3 h-3 mr-1" />
                 360°
@@ -140,7 +140,7 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
           {/* Compteur d'images */}
           <div className="absolute bottom-3 right-3 bg-black/50 text-white px-2 py-1 rounded text-xs flex items-center gap-1">
             <Camera className="w-3 h-3" />
-            {currentImageIndex + 1}/{property.images.length}
+            {currentImageIndex + 1}/{propertyData.images.length}
           </div>
         </div>
 
