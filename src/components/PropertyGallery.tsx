@@ -223,15 +223,15 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
               <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
                 <div className="space-y-6">
                   <div>
-                    <h2 className="text-2xl font-bold">{property.title}</h2>
+                    <h2 className="text-2xl font-bold">{propertyData.title}</h2>
                     <p className="text-gray-600 flex items-center gap-1">
                       <MapPin className="w-4 h-4" />
-                      {property.location}
+                      {propertyData.location}
                     </p>
                   </div>
 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {property.images.map((image, index) => (
+                    {propertyData.images.map((image, index) => (
                       <img
                         key={index}
                         src={image}
@@ -243,13 +243,13 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
 
                   <div>
                     <h3 className="font-semibold mb-2">Description</h3>
-                    <p className="text-gray-700">{property.description}</p>
+                    <p className="text-gray-700">{propertyData.description}</p>
                   </div>
 
                   <div>
                     <h3 className="font-semibold mb-2">Caractéristiques</h3>
                     <div className="grid grid-cols-2 gap-2">
-                      {property.features.map((feature, index) => (
+                      {propertyData.features.map((feature, index) => (
                         <div key={index} className="flex items-center gap-2">
                           <div className="w-2 h-2 bg-brand-blue rounded-full"></div>
                           <span className="text-sm">{feature}</span>
