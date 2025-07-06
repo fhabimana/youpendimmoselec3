@@ -26,9 +26,19 @@ const AdminLogin = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Logique de connexion administrateur
-    console.log("Connexion administrateur:", formData);
-    // Redirection vers l'espace admin après connexion réussie
+
+    // Accès admin simplifié - accepte n'importe quel email/mot de passe
+    if (formData.email && formData.password) {
+      console.log("Connexion administrateur autorisée:", formData);
+      navigate("/admin");
+    } else {
+      alert("Veuillez remplir les champs email et mot de passe.");
+    }
+  };
+
+  // Fonction pour accès direct sans credentials
+  const handleDirectAccess = () => {
+    console.log("Accès direct administrateur");
     navigate("/admin");
   };
 
@@ -51,15 +61,17 @@ const AdminLogin = () => {
             <p className="text-gray-600">Accédez à l'espace d'administration</p>
           </div>
 
-          {/* Security Warning */}
-          <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+          {/* Welcome Message */}
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
             <div className="flex items-start gap-3">
-              <AlertTriangle className="w-5 h-5 text-red-600 mt-0.5" />
+              <Shield className="w-5 h-5 text-blue-600 mt-0.5" />
               <div>
-                <h3 className="font-medium text-red-800">Accès Sécurisé</h3>
-                <p className="text-sm text-red-700 mt-1">
-                  Cet espace est réservé aux administrateurs autorisés. Toute
-                  tentative d'accès non autorisée sera signalée.
+                <h3 className="font-medium text-blue-800">
+                  Bienvenue Administrateur
+                </h3>
+                <p className="text-sm text-blue-700 mt-1">
+                  Connectez-vous avec vos identifiants ou utilisez l'accès
+                  direct pour gérer la plateforme.
                 </p>
               </div>
             </div>
@@ -78,13 +90,12 @@ const AdminLogin = () => {
                     <Input
                       id="email"
                       type="email"
-                      placeholder="admin@youpendimmoselect.com"
+                      placeholder="Votre email administrateur"
                       className="pl-10 border-gray-200 focus:border-brand-green"
                       value={formData.email}
                       onChange={(e) =>
                         handleInputChange("email", e.target.value)
                       }
-                      required
                     />
                   </div>
                 </div>
@@ -96,13 +107,12 @@ const AdminLogin = () => {
                     <Input
                       id="password"
                       type="password"
-                      placeholder="••••••••"
+                      placeholder="Votre mot de passe"
                       className="pl-10 border-gray-200 focus:border-brand-green"
                       value={formData.password}
                       onChange={(e) =>
                         handleInputChange("password", e.target.value)
                       }
-                      required
                     />
                   </div>
                 </div>
@@ -134,6 +144,15 @@ const AdminLogin = () => {
                 >
                   <Shield className="w-4 h-4 mr-2" />
                   Se Connecter
+                </Button>
+
+                <Button
+                  type="button"
+                  onClick={handleDirectAccess}
+                  className="w-full bg-brand-blue hover:bg-brand-blue/90 text-white font-semibold py-3 mt-3"
+                >
+                  <Shield className="w-4 h-4 mr-2" />
+                  Accès Direct Administrateur
                 </Button>
 
                 <div className="text-center">

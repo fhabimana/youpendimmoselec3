@@ -2,7 +2,13 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import PropertyLocationModal from "./PropertyLocationModal";
 import {
   Heart,
@@ -21,7 +27,7 @@ import {
 } from "lucide-react";
 
 interface PropertyGalleryProps {
-  property: {
+  property?: {
     id: string;
     title: string;
     price: string;
@@ -43,15 +49,32 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
 
+  // Valeurs par défaut si property n'est pas fourni
+  const defaultProperty = {
+    id: "1",
+    title: "Propriété à découvrir",
+    price: "$150,000",
+    location: "Kinshasa, RDC",
+    bedrooms: 2,
+    bathrooms: 1,
+    area: "85m²",
+    parking: 1,
+    images: ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400"],
+    description: "Belle propriété à découvrir",
+    features: ["Climatisé", "Parking", "Sécurité"],
+  };
+
+  const propertyData = property || defaultProperty;
+
   const nextImage = () => {
     setCurrentImageIndex((prev) =>
-      prev === property.images.length - 1 ? 0 : prev + 1,
+      prev === propertyData.images.length - 1 ? 0 : prev + 1,
     );
   };
 
   const prevImage = () => {
     setCurrentImageIndex((prev) =>
-      prev === 0 ? property.images.length - 1 : prev - 1,
+      prev === 0 ? propertyData.images.length - 1 : prev - 1,
     );
   };
 
@@ -61,13 +84,13 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
         {/* Image principale */}
         <div className="relative h-64 overflow-hidden rounded-t-lg">
           <img
-            src={property.images[currentImageIndex]}
-            alt={property.title}
+            src={propertyData.images[currentImageIndex]}
+            alt={propertyData.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
 
           {/* Navigation des images */}
-          {property.images.length > 1 && (
+          {propertyData.images.length > 1 && (
             <>
               <Button
                 variant="ghost"
@@ -91,7 +114,7 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
           {/* Badges */}
           <div className="absolute top-3 left-3 flex gap-2">
             <Badge className="bg-brand-green text-white">À vendre</Badge>
-            {property.virtualTour && (
+            {propertyData.virtualTour && (
               <Badge variant="secondary" className="bg-blue-500 text-white">
                 <Video className="w-3 h-3 mr-1" />
                 360°
@@ -123,14 +146,14 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
           {/* Compteur d'images */}
           <div className="absolute bottom-3 right-3 bg-black/50 text-white px-2 py-1 rounded text-xs flex items-center gap-1">
             <Camera className="w-3 h-3" />
-            {currentImageIndex + 1}/{property.images.length}
+            {currentImageIndex + 1}/{propertyData.images.length}
           </div>
         </div>
 
         {/* Galerie d'aperçu */}
-        {property.images.length > 1 && (
+        {propertyData.images.length > 1 && (
           <div className="flex gap-1 p-2 bg-gray-50">
-            {property.images.slice(0, 4).map((image, index) => (
+            {propertyData.images.slice(0, 4).map((image, index) => (
               <button
                 key={index}
                 className={`relative flex-1 h-12 rounded overflow-hidden ${
@@ -143,9 +166,9 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
                   alt={`Vue ${index + 1}`}
                   className="w-full h-full object-cover"
                 />
-                {index === 3 && property.images.length > 4 && (
+                {index === 3 && propertyData.images.length > 4 && (
                   <div className="absolute inset-0 bg-black/60 flex items-center justify-center text-white text-xs font-medium">
-                    +{property.images.length - 4}
+                    +{propertyData.images.length - 4}
                   </div>
                 )}
               </button>
@@ -160,15 +183,15 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
           <div className="flex justify-between items-start">
             <div>
               <h3 className="font-semibold text-lg text-gray-900 group-hover:text-brand-blue transition-colors">
-                {property.title}
+                {propertyData.title}
               </h3>
               <p className="text-gray-600 text-sm flex items-center gap-1">
                 <MapPin className="w-3 h-3" />
-                {property.location}
+                {propertyData.location}
               </p>
             </div>
             <span className="font-bold text-xl text-brand-blue">
-              {property.price}
+              {propertyData.price}
             </span>
           </div>
 
@@ -176,20 +199,20 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
           <div className="flex items-center gap-4 text-gray-600 text-sm">
             <div className="flex items-center gap-1">
               <Bed className="w-4 h-4" />
-              <span>{property.bedrooms}</span>
+              <span>{propertyData.bedrooms}</span>
             </div>
             <div className="flex items-center gap-1">
               <Bath className="w-4 h-4" />
-              <span>{property.bathrooms}</span>
+              <span>{propertyData.bathrooms}</span>
             </div>
             <div className="flex items-center gap-1">
               <Square className="w-4 h-4" />
-              <span>{property.area}</span>
+              <span>{propertyData.area}</span>
             </div>
-            {property.parking > 0 && (
+            {propertyData.parking > 0 && (
               <div className="flex items-center gap-1">
                 <Car className="w-4 h-4" />
-                <span>{property.parking}</span>
+                <span>{propertyData.parking}</span>
               </div>
             )}
           </div>
@@ -204,17 +227,19 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle>{propertyData.title}</DialogTitle>
+                </DialogHeader>
                 <div className="space-y-6">
                   <div>
-                    <h2 className="text-2xl font-bold">{property.title}</h2>
                     <p className="text-gray-600 flex items-center gap-1">
                       <MapPin className="w-4 h-4" />
-                      {property.location}
+                      {propertyData.location}
                     </p>
                   </div>
 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {property.images.map((image, index) => (
+                    {propertyData.images.map((image, index) => (
                       <img
                         key={index}
                         src={image}
@@ -226,13 +251,13 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
 
                   <div>
                     <h3 className="font-semibold mb-2">Description</h3>
-                    <p className="text-gray-700">{property.description}</p>
+                    <p className="text-gray-700">{propertyData.description}</p>
                   </div>
 
                   <div>
                     <h3 className="font-semibold mb-2">Caractéristiques</h3>
                     <div className="grid grid-cols-2 gap-2">
-                      {property.features.map((feature, index) => (
+                      {propertyData.features.map((feature, index) => (
                         <div key={index} className="flex items-center gap-2">
                           <div className="w-2 h-2 bg-brand-blue rounded-full"></div>
                           <span className="text-sm">{feature}</span>
@@ -245,15 +270,15 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
             </Dialog>
 
             {/* Bouton de géolocalisation */}
-            {property.latitude && property.longitude && (
+            {propertyData.latitude && propertyData.longitude && (
               <PropertyLocationModal
                 property={{
-                  id: property.id,
-                  title: property.title,
-                  location: property.location,
-                  latitude: property.latitude,
-                  longitude: property.longitude,
-                  price: property.price,
+                  id: propertyData.id,
+                  title: propertyData.title,
+                  location: propertyData.location,
+                  latitude: propertyData.latitude,
+                  longitude: propertyData.longitude,
+                  price: propertyData.price,
                 }}
               >
                 <Button variant="outline" className="flex-1">
@@ -263,7 +288,7 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
               </PropertyLocationModal>
             )}
 
-            {property.virtualTour && (
+            {propertyData.virtualTour && (
               <Button className="bg-brand-blue hover:bg-brand-blue/90">
                 <Video className="w-4 h-4 mr-2" />
                 Visite 360°

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import PDFGenerator from "@/components/PDFGenerator";
 import ContractManagement from "@/components/dashboard/ContractManagement";
 import PaymentTracking from "@/components/dashboard/PaymentTracking";
 import MaintenanceRequests from "@/components/dashboard/MaintenanceRequests";
@@ -8,6 +9,8 @@ import FinancialReports from "@/components/dashboard/FinancialReports";
 import CalendarSchedule from "@/components/dashboard/CalendarSchedule";
 import NotificationCenter from "@/components/dashboard/NotificationCenter";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -29,6 +32,64 @@ import {
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
+  const [isOwner, setIsOwner] = useState(false);
+  const [accessKey, setAccessKey] = useState("");
+
+  // Vérification d'accès propriétaire
+  const verifyOwnerAccess = () => {
+    const ownerKeys = ["proprietaire", "owner", "123456", "admin"];
+    if (ownerKeys.includes(accessKey.toLowerCase())) {
+      setIsOwner(true);
+    } else {
+      alert("Clé d'accès incorrecte. Accès refusé.");
+    }
+  };
+
+  // Si pas propriétaire, afficher la page de vérification
+  if (!isOwner) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <main className="container mx-auto px-4 py-8">
+          <div className="max-w-md mx-auto">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-center">
+                  Accès Propriétaire Requis
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-center text-gray-600">
+                  Ce tableau de bord est réservé aux propriétaires. Veuillez
+                  saisir votre clé d'accès.
+                </p>
+                <div className="space-y-2">
+                  <Label>Clé d'Accès Propriétaire</Label>
+                  <Input
+                    type="password"
+                    placeholder="Saisissez votre clé d'accès"
+                    value={accessKey}
+                    onChange={(e) => setAccessKey(e.target.value)}
+                    onKeyPress={(e) => e.key === "Enter" && verifyOwnerAccess()}
+                  />
+                </div>
+                <Button
+                  onClick={verifyOwnerAccess}
+                  className="w-full bg-brand-blue hover:bg-brand-blue/90"
+                >
+                  Vérifier l'Accès
+                </Button>
+                <p className="text-xs text-center text-gray-500">
+                  Clés acceptées: proprietaire, owner, 123456, admin
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   // Données du tableau de bord global
   const dashboardStats = {
@@ -124,7 +185,7 @@ const Dashboard = () => {
 
           {/* Main Tabs Navigation */}
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-3 lg:grid-cols-7">
+            <TabsList className="grid w-full grid-cols-3 lg:grid-cols-8">
               <TabsTrigger value="overview" className="flex items-center gap-2">
                 <LayoutDashboard className="w-4 h-4" />
                 Aperçu
@@ -150,6 +211,10 @@ const Dashboard = () => {
               <TabsTrigger value="reports" className="flex items-center gap-2">
                 <BarChart3 className="w-4 h-4" />
                 Rapports
+              </TabsTrigger>
+              <TabsTrigger value="pdf" className="flex items-center gap-2">
+                <FileText className="w-4 h-4" />
+                Imprimer PDF
               </TabsTrigger>
               <TabsTrigger value="calendar" className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
@@ -399,6 +464,35 @@ const Dashboard = () => {
             {/* Calendar Tab */}
             <TabsContent value="calendar">
               <CalendarSchedule />
+            </TabsContent>
+
+            {/* PDF Tab */}
+            <TabsContent value="pdf" className="space-y-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Rapports Financiers PDF</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <PDFGenerator
+                      reportType="financial"
+                      title="Rapport Financier Propriétaire"
+                    />
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Rapports Propriétés PDF</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <PDFGenerator
+                      reportType="property"
+                      title="Rapport Gestion Propriétés"
+                    />
+                  </CardContent>
+                </Card>
+              </div>
             </TabsContent>
 
             {/* Notifications Tab */}

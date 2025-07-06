@@ -52,16 +52,38 @@ const AdvancedSearchForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label>Ville</Label>
+            <Label>Province</Label>
             <Select>
               <SelectTrigger>
-                <SelectValue placeholder="Sélectionnez une ville" />
+                <SelectValue placeholder="Sélectionnez une province" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="kinshasa">Kinshasa</SelectItem>
-                <SelectItem value="lubumbashi">Lubumbashi</SelectItem>
-                <SelectItem value="mbuji-mayi">Mbuji-Mayi</SelectItem>
-                <SelectItem value="kananga">Kananga</SelectItem>
+                <SelectItem value="kongo-central">Kongo Central</SelectItem>
+                <SelectItem value="kwango">Kwango</SelectItem>
+                <SelectItem value="kwilu">Kwilu</SelectItem>
+                <SelectItem value="mai-ndombe">Mai-Ndombe</SelectItem>
+                <SelectItem value="kasai">Kasaï</SelectItem>
+                <SelectItem value="kasai-central">Kasaï Central</SelectItem>
+                <SelectItem value="kasai-oriental">Kasaï Oriental</SelectItem>
+                <SelectItem value="lomami">Lomami</SelectItem>
+                <SelectItem value="sankuru">Sankuru</SelectItem>
+                <SelectItem value="maniema">Maniema</SelectItem>
+                <SelectItem value="sud-kivu">Sud-Kivu</SelectItem>
+                <SelectItem value="nord-kivu">Nord-Kivu</SelectItem>
+                <SelectItem value="ituri">Ituri</SelectItem>
+                <SelectItem value="haut-uele">Haut-Uélé</SelectItem>
+                <SelectItem value="bas-uele">Bas-Uélé</SelectItem>
+                <SelectItem value="nord-ubangi">Nord-Ubangi</SelectItem>
+                <SelectItem value="sud-ubangi">Sud-Ubangi</SelectItem>
+                <SelectItem value="mongala">Mongala</SelectItem>
+                <SelectItem value="tshuapa">Tshuapa</SelectItem>
+                <SelectItem value="equateur">Équateur</SelectItem>
+                <SelectItem value="haut-katanga">Haut-Katanga</SelectItem>
+                <SelectItem value="lualaba">Lualaba</SelectItem>
+                <SelectItem value="kolwezi">Kolwezi</SelectItem>
+                <SelectItem value="haut-lomami">Haut-Lomami</SelectItem>
+                <SelectItem value="tanganyika">Tanganyika</SelectItem>
               </SelectContent>
             </Select>
           </div>

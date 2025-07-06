@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ReportEditor from "@/components/ReportEditor";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -189,7 +190,7 @@ const Admin = () => {
 
           {/* Main Tabs */}
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-2 lg:grid-cols-6">
+            <TabsList className="grid w-full grid-cols-2 lg:grid-cols-7">
               <TabsTrigger
                 value="dashboard"
                 className="flex items-center gap-2"
@@ -211,6 +212,10 @@ const Admin = () => {
               <TabsTrigger value="messages" className="flex items-center gap-2">
                 <MessageSquare className="w-4 h-4" />
                 Messages
+              </TabsTrigger>
+              <TabsTrigger value="reports" className="flex items-center gap-2">
+                <FileText className="w-4 h-4" />
+                Rédiger Rapport
               </TabsTrigger>
               <TabsTrigger value="content" className="flex items-center gap-2">
                 <FileText className="w-4 h-4" />
@@ -676,6 +681,11 @@ const Admin = () => {
                   </CardContent>
                 </Card>
               </div>
+            </TabsContent>
+
+            {/* Reports Tab */}
+            <TabsContent value="reports" className="space-y-6">
+              <ReportEditor />
             </TabsContent>
 
             {/* Settings Tab */}

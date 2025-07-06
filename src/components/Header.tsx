@@ -31,6 +31,18 @@ const Header = () => {
               Acheter
             </Link>
             <Link
+              to="/louer"
+              className="text-brand-gray hover:text-brand-blue transition-colors font-medium"
+            >
+              Louer
+            </Link>
+            <Link
+              to="/location"
+              className="text-brand-gray hover:text-brand-blue transition-colors font-medium"
+            >
+              Location
+            </Link>
+            <Link
               to="/dashboard"
               className="text-brand-gray hover:text-brand-blue transition-colors font-medium"
             >

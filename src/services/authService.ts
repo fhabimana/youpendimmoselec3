@@ -77,7 +77,14 @@ export class AuthService {
         error,
       } = await supabase.auth.getUser();
 
-      if (error) throw error;
+      // Si l'erreur est "AuthSessionMissingError", ce n'est pas vraiment une erreur
+      // cela signifie simplement qu'aucun utilisateur n'est connecté
+      if (error) {
+        if (error.message?.includes("Auth session missing")) {
+          return { user: null, error: null };
+        }
+        throw error;
+      }
 
       if (user) {
         // Récupérer les informations complètes de l'utilisateur
@@ -87,12 +94,25 @@ export class AuthService {
           .eq("id", user.id)
           .single();
 
-        if (userError) throw userError;
+        if (userError) {
+          // Si l'utilisateur n'existe pas dans la table users, ce n'est pas forcément une erreur
+          if (userError.code === "PGRST116") {
+            return { user: null, error: null };
+          }
+          throw userError;
+        }
         return { user: userData, error: null };
       }
 
       return { user: null, error: null };
-    } catch (error) {
+    } catch (error: any) {
+      // Gérer spécifiquement l'erreur de session manquante
+      if (
+        error?.name === "AuthSessionMissingError" ||
+        error?.message?.includes("Auth session missing")
+      ) {
+        return { user: null, error: null };
+      }
       console.error("Erreur lors de la récupération de l'utilisateur:", error);
       return { user: null, error };
     }
