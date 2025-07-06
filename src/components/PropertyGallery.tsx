@@ -145,9 +145,9 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
         </div>
 
         {/* Galerie d'aperçu */}
-        {property.images.length > 1 && (
+        {propertyData.images.length > 1 && (
           <div className="flex gap-1 p-2 bg-gray-50">
-            {property.images.slice(0, 4).map((image, index) => (
+            {propertyData.images.slice(0, 4).map((image, index) => (
               <button
                 key={index}
                 className={`relative flex-1 h-12 rounded overflow-hidden ${
@@ -160,9 +160,9 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
                   alt={`Vue ${index + 1}`}
                   className="w-full h-full object-cover"
                 />
-                {index === 3 && property.images.length > 4 && (
+                {index === 3 && propertyData.images.length > 4 && (
                   <div className="absolute inset-0 bg-black/60 flex items-center justify-center text-white text-xs font-medium">
-                    +{property.images.length - 4}
+                    +{propertyData.images.length - 4}
                   </div>
                 )}
               </button>
