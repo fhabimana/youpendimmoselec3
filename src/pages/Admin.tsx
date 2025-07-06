@@ -190,7 +190,7 @@ const Admin = () => {
 
           {/* Main Tabs */}
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-2 lg:grid-cols-6">
+            <TabsList className="grid w-full grid-cols-2 lg:grid-cols-7">
               <TabsTrigger
                 value="dashboard"
                 className="flex items-center gap-2"
@@ -212,6 +212,10 @@ const Admin = () => {
               <TabsTrigger value="messages" className="flex items-center gap-2">
                 <MessageSquare className="w-4 h-4" />
                 Messages
+              </TabsTrigger>
+              <TabsTrigger value="reports" className="flex items-center gap-2">
+                <FileText className="w-4 h-4" />
+                Rédiger Rapport
               </TabsTrigger>
               <TabsTrigger value="content" className="flex items-center gap-2">
                 <FileText className="w-4 h-4" />
