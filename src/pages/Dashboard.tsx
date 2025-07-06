@@ -30,6 +30,64 @@ import {
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
+  const [isOwner, setIsOwner] = useState(false);
+  const [accessKey, setAccessKey] = useState("");
+
+  // Vérification d'accès propriétaire
+  const verifyOwnerAccess = () => {
+    const ownerKeys = ["proprietaire", "owner", "123456", "admin"];
+    if (ownerKeys.includes(accessKey.toLowerCase())) {
+      setIsOwner(true);
+    } else {
+      alert("Clé d'accès incorrecte. Accès refusé.");
+    }
+  };
+
+  // Si pas propriétaire, afficher la page de vérification
+  if (!isOwner) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <main className="container mx-auto px-4 py-8">
+          <div className="max-w-md mx-auto">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-center">
+                  Accès Propriétaire Requis
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-center text-gray-600">
+                  Ce tableau de bord est réservé aux propriétaires. Veuillez
+                  saisir votre clé d'accès.
+                </p>
+                <div className="space-y-2">
+                  <Label>Clé d'Accès Propriétaire</Label>
+                  <Input
+                    type="password"
+                    placeholder="Saisissez votre clé d'accès"
+                    value={accessKey}
+                    onChange={(e) => setAccessKey(e.target.value)}
+                    onKeyPress={(e) => e.key === "Enter" && verifyOwnerAccess()}
+                  />
+                </div>
+                <Button
+                  onClick={verifyOwnerAccess}
+                  className="w-full bg-brand-blue hover:bg-brand-blue/90"
+                >
+                  Vérifier l'Accès
+                </Button>
+                <p className="text-xs text-center text-gray-500">
+                  Clés acceptées: proprietaire, owner, 123456, admin
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   // Données du tableau de bord global
   const dashboardStats = {
