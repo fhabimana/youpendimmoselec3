@@ -177,15 +177,15 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
           <div className="flex justify-between items-start">
             <div>
               <h3 className="font-semibold text-lg text-gray-900 group-hover:text-brand-blue transition-colors">
-                {property.title}
+                {propertyData.title}
               </h3>
               <p className="text-gray-600 text-sm flex items-center gap-1">
                 <MapPin className="w-3 h-3" />
-                {property.location}
+                {propertyData.location}
               </p>
             </div>
             <span className="font-bold text-xl text-brand-blue">
-              {property.price}
+              {propertyData.price}
             </span>
           </div>
 
@@ -193,20 +193,20 @@ const PropertyGallery = ({ property }: PropertyGalleryProps) => {
           <div className="flex items-center gap-4 text-gray-600 text-sm">
             <div className="flex items-center gap-1">
               <Bed className="w-4 h-4" />
-              <span>{property.bedrooms}</span>
+              <span>{propertyData.bedrooms}</span>
             </div>
             <div className="flex items-center gap-1">
               <Bath className="w-4 h-4" />
-              <span>{property.bathrooms}</span>
+              <span>{propertyData.bathrooms}</span>
             </div>
             <div className="flex items-center gap-1">
               <Square className="w-4 h-4" />
-              <span>{property.area}</span>
+              <span>{propertyData.area}</span>
             </div>
-            {property.parking > 0 && (
+            {propertyData.parking > 0 && (
               <div className="flex items-center gap-1">
                 <Car className="w-4 h-4" />
-                <span>{property.parking}</span>
+                <span>{propertyData.parking}</span>
               </div>
             )}
           </div>
